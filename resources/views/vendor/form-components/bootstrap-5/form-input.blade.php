@@ -17,6 +17,7 @@
         @endif
 
         name="{{ $name }}"
+        id="{{ $name }}"
 
         @if($label && !$attributes->get('id'))
             id="{{ $id() }}"

@@ -9,7 +9,7 @@
             wire:model{!! $wireModifier() !!}="{{ $name }}"
         @endif
 
-        name="{{ $name }}"
+        name="{{ $name }}" id="{{ $name }}"
 
         @if($multiple)
             multiple
