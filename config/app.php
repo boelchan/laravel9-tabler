@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Yajra\Datatables\DatatablesServiceProvider::class,
+        App\Providers\MenuServiceProvider::class,
         /*
          * Application Service Providers...
          */
