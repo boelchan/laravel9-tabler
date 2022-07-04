@@ -188,7 +188,7 @@
 
     <script src="{{ asset('vendor/datatables/datatables.js') }}"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{ asset('js/sweetalert/sweetalert2@11.js') }}"></script>
 
     @yield('page-script')
 
