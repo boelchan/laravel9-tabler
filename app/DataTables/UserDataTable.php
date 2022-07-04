@@ -28,11 +28,17 @@ class UserDataTable extends DataTable
             });
         }
 
-        return $dataTable->addColumn('action', function ($query) {
-            return view('components.button.show', ['action' => route('user.show', $query->id)]) .
-                view('components.button.edit', ['action' => route('user.edit', $query->id)]) .
-                view('components.button.destroy', ['action' => route('user.destroy', $query->id), 'label' => $query->name]);
-        });
+        return $dataTable->editColumn('created_at', function ($query) {
+            return $query->created_at->diffForHumans();
+        })
+            ->editColumn('role', function ($query) {
+                return $query->roles->first()->name;
+            })
+            ->editColumn('action', function ($query) {
+                return view('components.button.show', ['action' => route('user.show', $query->id)]) .
+                    view('components.button.edit', ['action' => route('user.edit', $query->id)]) .
+                    view('components.button.destroy', ['action' => route('user.destroy', $query->id), 'label' => $query->name, 'target' => 'user-table']);
+            });
     }
 
     public function query(User $model)
@@ -66,6 +72,7 @@ class UserDataTable extends DataTable
             Column::computed('id')->title('no')->data('DT_RowIndex'),
             Column::make('name'),
             Column::make('email'),
+            Column::computed('role'),
             Column::make('created_at'),
             Column::computed('action')->addClass('text-center'),
         ];

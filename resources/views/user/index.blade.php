@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'User')
+
 @section('content')
 <div class="container-xl">
     <div class="col-md-12">

@@ -1,4 +1,4 @@
-<a href="javascript:void(0)" data-url="{{ $action }}" data-label="{{ $label }}" data-token="{{ csrf_token() }}" class="btn btn-sm btn-ghost-danger btn-icon table-delete me-1" data-toggle="tooltip" data-placement="top" title="Hapus data">
+<a href="javascript:void(0)" data-url="{{ $action }}" data-label="{{ $label }}" data-target="{{ $target }}" data-token="{{ csrf_token() }}" class="btn btn-sm btn-ghost-danger btn-icon table-delete me-1" data-toggle="tooltip" data-placement="top" title="Hapus data">
     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
         <line x1="4" y1="7" x2="20" y2="7"></line>

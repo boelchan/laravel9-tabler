@@ -38,7 +38,7 @@
                 </button>
                 <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
                     <a href="/">
-                        <img src="./static/logo-white.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                        <img src="{{ asset('static/logo-white.svg') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
                     </a>
                 </h1>
                 <div class="navbar-nav flex-row order-md-last">
@@ -87,7 +87,7 @@
                                                 data-bs-auto-close="outside" role="button" aria-expanded="false"
                                             @endisset
                                             >
-                                            <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                            <span class="d-md-none d-lg-inline-block me-1">
                                                 <i class="ti ti-{{ $m->icon }}"></i>
                                             </span>
                                             <span class="nav-link-title">
@@ -120,9 +120,9 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <!-- Page pre-title -->
-                            {{-- <div class="page-pretitle">
-                                Overview
-                            </div> --}}
+                            <div class="page-pretitle">
+                                @yield('sub-title')
+                            </div>
                             <h2 class="page-title">
                                 @yield('title')
                             </h2>
@@ -188,6 +188,8 @@
 
     <script src="{{ asset('vendor/datatables/datatables.js') }}"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @yield('page-script')
 
 </body>

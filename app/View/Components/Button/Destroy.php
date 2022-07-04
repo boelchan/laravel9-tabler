@@ -8,16 +8,18 @@ class Destroy extends Component
 {
     public $action;
     public $label;
+    public $target;
 
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($action, $label = 'data')
+    public function __construct($action, $label = 'data', $target)
     {
         $this->action = $action;
         $this->label = $label;
+        $this->target = $target;
     }
 
     /**

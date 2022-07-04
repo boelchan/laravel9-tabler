@@ -24,7 +24,8 @@ Route::get('form-element', function () {
 
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('user/{user}/change-password/', [UserController::class, 'changePassword'])->name('user.change-password');
 Route::resource('user', UserController::class);
