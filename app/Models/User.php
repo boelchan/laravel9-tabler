@@ -5,20 +5,24 @@ namespace App\Models;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
+use Spatie\Activitylog\LogOptions;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles, AuthenticationLoggable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles, AuthenticationLoggable, LogsActivity;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    public bool $logOnlyDirty = true;
+    
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()->logAll();
+    }
+
     protected $fillable = [
         'name',
         'email',
