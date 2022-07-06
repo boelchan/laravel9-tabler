@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AuthenticationLogDataTable;
 use App\DataTables\UserDataTable;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -32,7 +33,7 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'name'              => $request->name,
+            'name'              => ucwords(strtolower($request->name)),
             'email'             => $request->email,
             'password'          => Hash::make($request->password),
             'email_verified_at' => now(),
@@ -41,9 +42,9 @@ class UserController extends Controller
         return redirect()->route('user.index');
     }
 
-    public function show(User $user)
+    public function show(User $user, AuthenticationLogDataTable $authenticationLogDataTable)
     {
-        //
+        return $authenticationLogDataTable->render('user.show', compact('user'));
     }
 
     public function edit(User $user)
@@ -60,7 +61,7 @@ class UserController extends Controller
             'email' => 'required|email|unique:users,email,' . $user->id,
         ]);
 
-        $user->name = $request->name;
+        $user->name = ucwords(strtolower($request->name));
         $user->email = $request->email;
         $user->save();
 

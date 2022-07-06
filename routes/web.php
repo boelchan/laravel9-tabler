@@ -18,14 +18,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('form-element', function () {
-    return view('form-element');
-});
-
-
-
 Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('user/{user}/change-password/', [UserController::class, 'changePassword'])->name('user.change-password');
-Route::resource('user', UserController::class);
+Route::get('/setting-profile', [App\Http\Controllers\HomeController::class, 'settingProfile'])->name('setting-profile')->middleware('auth');
+
+Route::middleware('role:superadmin')->group(function () {
+    Route::post('user/{user}/change-password/', [UserController::class, 'changePassword'])->name('user.change-password');
+    Route::resource('user', UserController::class);
+});

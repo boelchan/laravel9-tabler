@@ -17,7 +17,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable, HasRoles, AuthenticationLoggable, LogsActivity;
 
     public bool $logOnlyDirty = true;
-    
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()->logAll();
@@ -62,5 +62,17 @@ class User extends Authenticatable
                 $user->syncRoles($role);
             }
         });
+    }
+
+    public function getAcronymAttribute()
+    {
+        $words = explode(' ', $this->name);
+        $acronym = "";
+
+        foreach ($words as $w) {
+            $acronym .= substr($w, 0, 1);
+        }
+
+        return $acronym;
     }
 }

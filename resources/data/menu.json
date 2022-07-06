@@ -8,38 +8,15 @@
         ]
     },
     {
-        "title": "User",
-        "icon": "user",
+        "title": "Sistem",
+        "icon": "settings",
         "role": [
             "superadmin"
         ],
         "sub": [
-            {
-                "title": "Admin",
-                "url": "admin",
-                "role": [
-                    "superadmin"
-                ]
-            },
             {
                 "title": "User",
                 "url": "user",
-                "role": [
-                    "superadmin"
-                ]
-            }
-        ]
-    },
-    {
-        "title": "Post",
-        "icon": "pencil",
-        "role": [
-            "superadmin"
-        ],
-        "sub": [
-            {
-                "title": "Admin",
-                "url": "admin",
                 "role": [
                     "superadmin"
                 ]
