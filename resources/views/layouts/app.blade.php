@@ -54,7 +54,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             @if (Auth::check())
-                                <a href="{{ route('setting-profile') }}" class="dropdown-item">Setting Profil</a>
+                                <a href="{{ route('show-profile') }}" class="dropdown-item">Pengaturan Akun</a>
                                 <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf

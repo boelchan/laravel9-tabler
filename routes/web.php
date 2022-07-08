@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 
@@ -20,8 +21,10 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/setting-profile', [App\Http\Controllers\HomeController::class, 'settingProfile'])->name('setting-profile')->middleware('auth');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/show-profile', [HomeController::class, 'showProfile'])->name('show-profile');
+Route::post('/update-profile', [HomeController::class, 'updateProfile'])->name('profile-store');
+Route::post('/change-password', [HomeController::class, 'changePassword'])->name('profile-change-password');
 
 Route::middleware('role:superadmin')->group(function () {
     Route::post('user/{user}/change-password/', [UserController::class, 'changePassword'])->name('user.change-password');

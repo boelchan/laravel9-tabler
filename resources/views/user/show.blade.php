@@ -8,13 +8,13 @@
     <div class="col-12">
         <div class="row row-cards">
             <div class="col-md-6 col-lg-3">
-                <div class="card">
+                <div class="card border-primary">
                     <div class="card-body p-4 text-center">
-                        <span class="avatar avatar-xl mb-3 avatar-rounded">{{ $user->acronym }}</span>
+                        <span class="avatar avatar-xl mb-3 avatar-rounded bg-indigo">{{ $user->acronym }}</span>
                         <h3 class="m-0 mb-1"><a href="#">{{ $user->name }}</a></h3>
                         <div class="text-muted">{{ $user->email }}</div>
                         <div class="mt-3">
-                            <span class="badge bg-green-lt">{{ $user->roles->first()->name }}</span>
+                            <span class="badge bg-indigo-lt">{{ Str::upper($user->roles->first()->name) }}</span>
                         </div>
                     </div>
                     <div class="d-flex">
