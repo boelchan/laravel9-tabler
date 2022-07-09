@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\AuthenticationLogDataTable;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -20,10 +22,10 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function showProfile()
+    public function showProfile(AuthenticationLogDataTable $authenticationLogDataTable)
     {
         $user = auth()->user();
-        return view('auth.show-profile', compact('user'));
+        return $authenticationLogDataTable->render('auth.show-profile', compact('user'));
     }
 
     public function updateProfile(Request $request)
@@ -44,17 +46,19 @@ class HomeController extends Controller
 
     public function changePassword(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'password_old' => new MatchOldPassword,
             'password' => 'required',
             'password_confirmation' => 'same:password',
         ]);
+
+        if ($validator->fails()) return redirect('show-profile#tabs-password')->withErrors($validator)->withInput();
 
         $user = User::findOrFail(auth()->user()->id);
 
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('show-profile')->with('message', 'Ubah Password Berhasil');
+        return redirect('show-profile#tabs-password')->with('message', 'Ubah Password Berhasil');
     }
 }

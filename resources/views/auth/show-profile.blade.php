@@ -20,47 +20,59 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-9">
-                @if(Session::has('message'))
-                <div class="alert alert-important alert-success alert-dismissible" role="alert">
-                    <div class="d-flex">
-                        <div>
-                            {{ Session::get('message') }}
-                        </div>
-                    </div>
-                    <a class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="close"></a>
-                </div>
-                @endif
-                <div class="row row-cards">
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Ubah Profil</h3>
+                <div class="card">
+                    <ul class="nav nav-tabs" data-bs-toggle="tabs">
+                        <li class="nav-item">
+                            <a href="#tabs-profile" class="nav-link active" data-bs-toggle="tab">
+                                Profil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#tabs-password" class="nav-link" data-bs-toggle="tab">
+                                Password</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#tabs-riwayat" class="nav-link" data-bs-toggle="tab">
+                                Riwayat Login</a>
+                        </li>
+                    </ul>
+                    <div class="card-body">
+                        <div class="tab-content">
+                            @if(Session::has('message'))
+                            <div class="alert alert-important alert-success alert-dismissible" role="alert">
+                                <div class="d-flex">
+                                    <div>
+                                        {{ Session::get('message') }}
+                                    </div>
+                                </div>
+                                <a class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="close"></a>
                             </div>
-                            <div class="card-body">
-                                <x-form :action="route('profile-store')">
-                                    @bind($user)
-                                    <x-form-input name="name" label="Nama" />
-                                    <x-form-input name="email" label="Email" />
-                                    @endbind
-                                    <x-form-submit class="mt-3">Simpan</x-form-submit>
-                                </x-form>
+                            @endif
+                            <div class="tab-pane active show" id="tabs-profile">
+                                <div class="col-md-6">
+                                    <x-form :action="route('profile-store')">
+                                        @bind($user)
+                                        <x-form-input name="name" label="Nama" />
+                                        <x-form-input name="email" label="Email" />
+                                        @endbind
+                                        <x-form-submit class="mt-3">Simpan Profil</x-form-submit>
+                                    </x-form>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Ubah Lama</h3>
+                            <div class="tab-pane" id="tabs-password">
+                                <div class="col-md-6">
+                                    <x-form :action="route('profile-change-password', $user->id)">
+                                        <x-form-input name="password_old" type="password" label="Password Lama" />
+                                        <x-form-input name="password" type="password" label="Password Baru" />
+                                        <x-form-input name="password_confirmation" type="password"
+                                            label="Ulangi Password Baru" />
+                                        <x-form-submit class="mt-3">Ubah Password</x-form-submit>
+                                    </x-form>
+                                </div>
                             </div>
-                            <div class="card-body">
-                                <x-form :action="route('profile-change-password', $user->id)">
-                                    <x-form-input name="password_old" type="password" label="Password Sekarang" />
-                                    <x-form-input name="password" type="password" label="Password Baru" />
-                                    <x-form-input name="password_confirmation" type="password"
-                                        label="Ulangi Password Baru" />
-
-                                    <x-form-submit class="mt-3">Simpan</x-form-submit>
-                                </x-form>
+                            <div class="tab-pane" id="tabs-riwayat">
+                                <div>
+                                    {{ $dataTable->table(['class' => 'table table-hover w-100 border-bottom']) }}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -69,4 +81,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('page-script')
+    {{ $dataTable->scripts() }}
 @endsection

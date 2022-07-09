@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Jenssegers\Agent\Agent;
 use Rappasoft\LaravelAuthenticationLog\Models\AuthenticationLog as ModelsAuthenticationLog;
 use Yajra\DataTables\Html\Button;
@@ -43,7 +44,7 @@ class AuthenticationLogDataTable extends DataTable
      */
     public function query(ModelsAuthenticationLog $model)
     {
-        return $model->where('authenticatable_id', request()->segment(2));
+        return $model->where('authenticatable_id', (request()->segment(2) ?? Auth::id()));
     }
 
     /**
