@@ -14,12 +14,14 @@ class UserController extends Controller
     public function index(UserDataTable $datatable)
     {
         $roleOption = Role::orderBy('name')->pluck('name', 'id')->all();
+
         return $datatable->render('user.index', compact('roleOption'));
     }
 
     public function create()
     {
         $roleOption = Role::orderBy('name')->pluck('name', 'id')->all();
+
         return view('user.create', compact('roleOption'));
     }
 
@@ -33,9 +35,9 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'name'              => ucwords(strtolower($request->name)),
-            'email'             => $request->email,
-            'password'          => Hash::make($request->password),
+            'name' => ucwords(strtolower($request->name)),
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
             'email_verified_at' => now(),
         ]);
 
@@ -50,6 +52,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roleOption = Role::orderBy('name')->pluck('name', 'id')->all();
+
         return view('user.edit', compact('user', 'roleOption'));
     }
 
@@ -58,7 +61,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:30',
             'role' => 'required',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
 
         $user->name = ucwords(strtolower($request->name));
@@ -85,6 +88,7 @@ class UserController extends Controller
         if ($user->delete()) {
             return response()->json(['success' => true]);
         }
+
         return response()->json(['message' => 'Data sedang digunakan'], 400);
     }
 }

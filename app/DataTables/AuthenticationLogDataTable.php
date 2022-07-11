@@ -15,7 +15,7 @@ class AuthenticationLogDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
+     * @param  mixed  $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
@@ -25,11 +25,13 @@ class AuthenticationLogDataTable extends DataTable
             ->addIndexColumn()
             ->editColumn('user_agent', function ($query) {
                 $agent = tap(new Agent, fn ($agent) => $agent->setUserAgent($query->user_agent));
-                return $agent->platform() . ' - ' . $agent->browser();
+
+                return $agent->platform().' - '.$agent->browser();
             })
             ->editColumn('login_at', function ($query) {
                 $login_at = Carbon::parse($query->login_at);
-                return ($query->login_at) ? $login_at->diffForHumans() . ' | ' . $login_at->format('d/m/Y H:i:s') : '-';
+
+                return ($query->login_at) ? $login_at->diffForHumans().' | '.$login_at->format('d/m/Y H:i:s') : '-';
             })
             ->editColumn('login_successful', function ($query) {
                 return $query->login_successful == true ? 'Berhasil' : 'Gagal';
@@ -39,7 +41,7 @@ class AuthenticationLogDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\AuthenticationLog $model
+     * @param  \App\Models\AuthenticationLog  $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(ModelsAuthenticationLog $model)
@@ -89,6 +91,6 @@ class AuthenticationLogDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'AuthenticationLog_' . date('YmdHis');
+        return 'AuthenticationLog_'.date('YmdHis');
     }
 }

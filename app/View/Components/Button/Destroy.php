@@ -7,7 +7,9 @@ use Illuminate\View\Component;
 class Destroy extends Component
 {
     public $action;
+
     public $label;
+
     public $target;
 
     /**
@@ -15,10 +17,10 @@ class Destroy extends Component
      *
      * @return void
      */
-    public function __construct($action, $label = 'data', $target)
+    public function __construct($action, $label, $target)
     {
         $this->action = $action;
-        $this->label = $label;
+        $this->label = $label ?? 'Data';
         $this->target = $target;
     }
 

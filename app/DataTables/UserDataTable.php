@@ -3,24 +3,22 @@
 namespace App\DataTables;
 
 use App\Models\User;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class UserDataTable extends DataTable
 {
-
     public function dataTable($query)
     {
-        $dataTable =  datatables()->eloquent($query)->addIndexColumn();
+        $dataTable = datatables()->eloquent($query)->addIndexColumn();
 
-        if (!request()->search['value']) {
+        if (! request()->search['value']) {
             $dataTable->filter(function ($query) {
                 if (request()->email) {
-                    $query->where('email', 'like', "%" . request()->email . "%");
+                    $query->where('email', 'like', '%'.request()->email.'%');
                 }
                 if (request()->name) {
-                    $query->where('name', 'like', "%" . request()->name . "%");
+                    $query->where('name', 'like', '%'.request()->name.'%');
                 }
                 if (request()->role) {
                     $query->where('role_id', request()->role);
@@ -35,8 +33,8 @@ class UserDataTable extends DataTable
                 return $query->roles->first()->name;
             })
             ->editColumn('action', function ($query) {
-                return view('components.button.show', ['action' => route('user.show', $query->id)]) .
-                    view('components.button.edit', ['action' => route('user.edit', $query->id)]) .
+                return view('components.button.show', ['action' => route('user.show', $query->id)]).
+                    view('components.button.edit', ['action' => route('user.edit', $query->id)]).
                     view('components.button.destroy', ['action' => route('user.destroy', $query->id), 'label' => $query->name, 'target' => 'user-table']);
             });
     }
@@ -59,7 +57,7 @@ class UserDataTable extends DataTable
                     d.email = $("#email").val(); 
                     d.name = $("#name").val();
                     d.role = $("#role").val();
-                }'
+                }',
             ])
             ->drawCallback("function( settings ) { $(document).find('[data-toggle=\"tooltip\"]').tooltip(); }")
             ->buttons('create', 'reset')

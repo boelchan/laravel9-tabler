@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class Edit extends Component
 {
     public $action;
+
     /**
      * Create a new component instance.
      *

@@ -7,6 +7,7 @@ use Illuminate\View\Component;
 class Modal extends Component
 {
     public $title;
+
     public $id;
 
     /**
@@ -14,7 +15,7 @@ class Modal extends Component
      *
      * @return void
      */
-    public function __construct($title = "Pencarian", $id = '')
+    public function __construct($title = 'Pencarian', $id = '')
     {
         $this->title = $title;
         $this->id = $id;

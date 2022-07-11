@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -25,6 +24,7 @@ class HomeController extends Controller
     public function showProfile(AuthenticationLogDataTable $authenticationLogDataTable)
     {
         $user = auth()->user();
+
         return $authenticationLogDataTable->render('auth.show-profile', compact('user'));
     }
 
@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         $request->validate([
             'name' => 'required|max:30',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
 
         $user->name = ucwords(strtolower($request->name));
@@ -52,7 +52,9 @@ class HomeController extends Controller
             'password_confirmation' => 'same:password',
         ]);
 
-        if ($validator->fails()) return redirect('show-profile#tabs-password')->withErrors($validator)->withInput();
+        if ($validator->fails()) {
+            return redirect('show-profile#tabs-password')->withErrors($validator)->withInput();
+        }
 
         $user = User::findOrFail(auth()->user()->id);
 
