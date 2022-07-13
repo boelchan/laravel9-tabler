@@ -4,7 +4,6 @@ namespace App\DataTables;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Jenssegers\Agent\Agent;
 use Rappasoft\LaravelAuthenticationLog\Models\AuthenticationLog as ModelsAuthenticationLog;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
@@ -24,9 +23,7 @@ class AuthenticationLogDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->editColumn('user_agent', function ($query) {
-                $agent = tap(new Agent, fn ($agent) => $agent->setUserAgent($query->user_agent));
-
-                return $agent->platform().' - '.$agent->browser();
+                return browser_agent($query->user_agent);
             })
             ->editColumn('login_at', function ($query) {
                 $login_at = Carbon::parse($query->login_at);

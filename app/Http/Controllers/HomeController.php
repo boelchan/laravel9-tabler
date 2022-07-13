@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\AuthenticationLogDataTable;
 use App\Models\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Http\Request;
@@ -21,11 +20,11 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function showProfile(AuthenticationLogDataTable $authenticationLogDataTable)
+    public function showProfile()
     {
         $user = auth()->user();
 
-        return $authenticationLogDataTable->render('auth.show-profile', compact('user'));
+        return view('auth.show-profile', compact('user'));
     }
 
     public function updateProfile(Request $request)

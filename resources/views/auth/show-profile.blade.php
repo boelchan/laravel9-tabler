@@ -71,7 +71,12 @@
                             </div>
                             <div class="tab-pane" id="tabs-riwayat">
                                 <div>
-                                    {{ $dataTable->table(['class' => 'table table-hover w-100 border-bottom']) }}
+                                    @foreach ($user->lastLogin as $l)
+                                        <div class="alert alert-{{ $l->login_successful ? 'success' : 'danger' }}" role="alert">
+                                            <h4 class="alert-title">{{ $l->login_at->diffForHumans() }}</h4>
+                                            <div class="text-muted">{{ browser_agent($l->user_agent) }}</div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -81,7 +86,4 @@
         </div>
     </div>
 </div>
-@endsection
-@section('page-script')
-    {{ $dataTable->scripts() }}
 @endsection

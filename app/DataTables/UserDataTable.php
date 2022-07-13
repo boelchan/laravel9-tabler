@@ -27,8 +27,11 @@ class UserDataTable extends DataTable
         }
 
         return $dataTable->editColumn('created_at', function ($query) {
-            return $query->created_at->diffForHumans();
+            return $query->created_at;
         })
+            ->editColumn('email_verified_at', function ($query) {
+                return $query->email_verified_at;
+            })
             ->editColumn('role', function ($query) {
                 return $query->roles->first()->name;
             })
@@ -41,8 +44,7 @@ class UserDataTable extends DataTable
 
     public function query(User $model)
     {
-        return $model->select('users.*')
-            ->leftJoin('model_has_roles', 'model_id', '=', 'users.id');
+        return $model->select('users.*')->leftJoin('model_has_roles', 'model_id', '=', 'users.id');
     }
 
     public function html()
@@ -72,6 +74,7 @@ class UserDataTable extends DataTable
             Column::make('email'),
             Column::computed('role'),
             Column::make('created_at'),
+            Column::make('email_verified_at'),
             Column::computed('action')->addClass('text-center'),
         ];
     }

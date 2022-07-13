@@ -20,7 +20,7 @@ class Destroy extends Component
     public function __construct($action, $label, $target)
     {
         $this->action = $action;
-        $this->label = $label ?? 'Data';
+        $this->label = $label;
         $this->target = $target;
     }
 

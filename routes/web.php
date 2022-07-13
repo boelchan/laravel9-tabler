@@ -19,12 +19,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes(['register' => false]);
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/show-profile', [HomeController::class, 'showProfile'])->name('show-profile');
-Route::post('/update-profile', [HomeController::class, 'updateProfile'])->name('profile-store');
-Route::post('/change-password', [HomeController::class, 'changePassword'])->name('profile-change-password');
+Route::middleware(['verified'])->group(function () {
+    Route::get('/show-profile', [HomeController::class, 'showProfile'])->name('show-profile');
+    Route::post('/update-profile', [HomeController::class, 'updateProfile'])->name('profile-store');
+    Route::post('/change-password', [HomeController::class, 'changePassword'])->name('profile-change-password');
+});
 
 Route::middleware('role:superadmin')->group(function () {
     Route::post('user/{user}/change-password/', [UserController::class, 'changePassword'])->name('user.change-password');
