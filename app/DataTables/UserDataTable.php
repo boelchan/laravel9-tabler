@@ -52,7 +52,6 @@ class UserDataTable extends DataTable
         return $this->builder()
             ->setTableId('user-table')
             ->columns($this->getColumns())
-            ->stateSave()
             ->orderBy(2, 'desc')
             ->ajax([
                 'data' => 'function(d) { 

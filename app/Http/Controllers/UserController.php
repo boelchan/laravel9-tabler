@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index(UserDataTable $datatable)
     {
-        $roleOption = Role::orderBy('name')->pluck('name', 'id')->all();
+        $roleOption = ['' => 'Semua'] + Role::orderBy('name')->pluck('name', 'id')->all();
 
         return $datatable->render('user.index', compact('roleOption'));
     }

@@ -1,44 +1,16 @@
-let keysPressed = {};
-
-document.addEventListener('keydown', (event) => {
-    keysPressed[event.key] = true;
-
-    if (keysPressed['Control'] && event.key == '/') {
-        load_modal()
-    }
-});
-
-document.addEventListener('keyup', (event) => {
-    delete keysPressed[event.key];
-});
-
-function load_modal_filter() {
-    load_modal()
-}
-
-function load_modal() {
-    $('#datatable-filter').modal('show');
-    $('#datatable-search-form').val('');
-}
-
-
 // submit filter datatable
 $('.submit-filter').on('click', function (e) {
     if ($(this).val() == 'reset') {
         $('.filter-datatable-form').find('input, select, textarea').val('').trigger('change');
     }
-    var target = $(this).data('target');
-    $('#' + target).DataTable().draw();
-    $('#datatable-filter').modal('hide');
+    
+    var dt =  $('#' + $(this).data('target'));
+    dt.DataTable().search('');
+    dt.DataTable().columns().search('');
+    dt.DataTable().draw();
 });
 
-$('#datatable-search-form').keyup(function (e) {
-    if (this.value.length == 1) {
-        $('.filter-datatable-form').find('input, select, textarea').val('').trigger('change');
-    }
-});
-
-
+// delete
 $('body').on('click', '.table-delete', function () {
     var label = 'data ?';
     if ($(this).data("label")) {

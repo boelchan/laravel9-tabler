@@ -4,7 +4,7 @@ namespace App\View\Components\Datatable;
 
 use Illuminate\View\Component;
 
-class FilterModal extends Component
+class Filter extends Component
 {
     public $target;
 
@@ -25,6 +25,6 @@ class FilterModal extends Component
      */
     public function render()
     {
-        return view('components.datatable.filter-modal');
+        return view('components.datatable.filter');
     }
 }
