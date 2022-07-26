@@ -49,7 +49,7 @@
                             @endif
                             <div class="tab-pane active show" id="tabs-profile">
                                 <div class="col-md-6">
-                                    <x-form :action="route('profile-store')">
+                                    <x-form :action="route('profile.store')">
                                         @bind($user)
                                         <x-form-input name="name" label="Nama" />
                                         <x-form-input name="email" label="Email" />
@@ -60,7 +60,7 @@
                             </div>
                             <div class="tab-pane" id="tabs-password">
                                 <div class="col-md-6">
-                                    <x-form :action="route('profile-change-password', $user->id)">
+                                    <x-form :action="route('profile.change-password', $user->id)">
                                         <x-form-input name="password_old" type="password" label="Password Lama" />
                                         <x-form-input name="password" type="password" label="Password Baru" />
                                         <x-form-input name="password_confirmation" type="password"
