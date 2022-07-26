@@ -80,7 +80,7 @@ return [
         /*
          * Default buttons to generate when not set.
          */
-        'buttons' => 'create,reset',
+        'buttons' => 'create',
 
         /*
          * Default DOM to generate when not set.

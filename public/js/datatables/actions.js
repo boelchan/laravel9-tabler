@@ -3,8 +3,8 @@ $('.submit-filter').on('click', function (e) {
     if ($(this).val() == 'reset') {
         $('.filter-datatable-form').find('input, select, textarea').val('').trigger('change');
     }
-    
-    var dt =  $('#' + $(this).data('target'));
+
+    var dt = $('#' + $(this).data('target'));
     dt.DataTable().search('');
     dt.DataTable().columns().search('');
     dt.DataTable().draw();
