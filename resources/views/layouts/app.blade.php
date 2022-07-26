@@ -60,7 +60,9 @@
                                     @csrf
                                 </form>
                             @else
+                                <a href="/" class="dropdown-item">Home</a>
                                 <a href="/login" class="dropdown-item">Login</a>
+                                <a href="/register" class="dropdown-item">Daftar</a>
                             @endif
 
                         </div>
