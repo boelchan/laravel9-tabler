@@ -19,7 +19,7 @@ Route::middleware(['verified'])->group(function () {
     Route::post('/profile/change-password', [ProfileController::class, 'changePasswordStore'])->name('profile.change-password');
 });
 
-Route::middleware('role:superadmin')->group(function () {
+Route::middleware(['auth', 'role:superadmin'])->group(function () {
     Route::post('user/{user}/change-password/', [UserController::class, 'changePassword'])->name('user.change-password');
     Route::resource('user', UserController::class);
 });
