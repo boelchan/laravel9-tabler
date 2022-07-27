@@ -33,12 +33,12 @@
         <x-form-label :label="$label" :for="$attributes->get('id') ?: $id()" />
     @endif
 
-@if($floating) </div> @endif
 
 {!! $help ?? null !!}
 
 @if($hasErrorAndShow($name))
     <x-form-errors :name="$name" />
 @endif
+@if($floating) </div> @endif
 
 @if($type === 'hidden') </div> @endif

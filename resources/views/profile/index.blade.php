@@ -51,8 +51,8 @@
                                 <div class="col-md-6">
                                     <x-form :action="route('profile.store')">
                                         @bind($user)
-                                        <x-form-input name="name" label="Nama" />
-                                        <x-form-input name="email" label="Email" />
+                                        <x-form-input name="name" label="Nama" floating class="mb-1"/>
+                                        <x-form-input name="email" label="Email" floating class="mb-1"/>
                                         @endbind
                                         <x-form-submit class="mt-3">Simpan Profil</x-form-submit>
                                     </x-form>
@@ -61,10 +61,10 @@
                             <div class="tab-pane" id="tabs-password">
                                 <div class="col-md-6">
                                     <x-form :action="route('profile.change-password', $user->id)">
-                                        <x-form-input name="password_old" type="password" label="Password Lama" />
-                                        <x-form-input name="password" type="password" label="Password Baru" />
+                                        <x-form-input name="password_old" type="password" label="Password Lama" floating class="mb-1"/>
+                                        <x-form-input name="password" type="password" label="Password Baru" floating class="mb-1"/>
                                         <x-form-input name="password_confirmation" type="password"
-                                            label="Ulangi Password Baru" />
+                                            label="Ulangi Password Baru" floating class="mb-1"/>
                                         <x-form-submit class="mt-3">Ubah Password</x-form-submit>
                                     </x-form>
                                 </div>

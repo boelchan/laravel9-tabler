@@ -14,15 +14,22 @@ class UserController extends Controller
     public function index(UserDataTable $datatable)
     {
         $roleOption = ['' => 'Semua'] + Role::orderBy('name')->pluck('name', 'id')->all();
+        $breadcrumbs = [
+            ['url' => '#', 'title' => 'Setting'], ['url' => '', 'title' => 'User'],
+        ];
 
-        return $datatable->render('user.index', compact('roleOption'));
+        return $datatable->render('user.index', compact('roleOption', 'breadcrumbs'));
     }
 
     public function create()
     {
+        $breadcrumbs = [
+            ['url' => '#', 'title' => 'Setting'], ['url' => route('user.index'), 'title' => 'User'], ['title' => 'Tambah User'],
+        ];
+
         $roleOption = Role::orderBy('name')->pluck('name', 'id')->all();
 
-        return view('user.create', compact('roleOption'));
+        return view('user.create', compact('roleOption', 'breadcrumbs'));
     }
 
     public function store(Request $request)
@@ -51,9 +58,13 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
+        $breadcrumbs = [
+            ['url' => '#', 'title' => 'Setting'], ['url' => route('user.index'), 'title' => 'User'], ['title' => 'Edit User '.$user->name],
+        ];
+
         $roleOption = Role::orderBy('name')->pluck('name', 'id')->all();
 
-        return view('user.edit', compact('user', 'roleOption'));
+        return view('user.edit', compact('user', 'roleOption', 'breadcrumbs'));
     }
 
     public function update(Request $request, User $user)
