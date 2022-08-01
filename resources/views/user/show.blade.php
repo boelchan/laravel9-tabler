@@ -19,7 +19,7 @@
                     </div>
                     <div class="d-flex">
                         <a href="javascript:void(0)" class="card-btn delete-user" data-url="{{ route('user.destroy', $user->id) }}"
-                            data-token="{{ csrf_token() }}">
+                            data-token="{{ csrf_token() }}" data-label="{{ $user->name }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
                                 fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -64,53 +64,4 @@
 
 @section('page-script')
 {{ $dataTable->scripts() }}
-
-<script>
-    $('body').on('click', '.delete-user', function () {
-        Swal.fire({
-            title: 'Hapus {{ $user->name }}',
-            text: "Data yang telah hapus tidak dapat dikembalikan",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Ya, Hapus!',
-            cancelButtonText: 'Tidak'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "DELETE",
-                    url: $(this).data("url"),
-                    data: { "_token": $(this).data('token') },
-                    success: function (data) {
-                        Swal.fire({
-                            title: 'Sukses',
-                            text: 'Data berhasil dihapus',
-                            icon: 'success',
-                            timer: 1000,
-                            showConfirmButton: false,
-                        }).then((result) => {
-                            location.href = '{{ route("user.index") }}';
-                        })
-                    },
-                    error: function (e) {
-                        if (e.responseJSON.message) {
-                            var swal_message = e.responseJSON.message;
-                        } else {
-                            var swal_message = "Data gagal dihapus";
-                        }
-                        Swal.fire({
-                            title: 'Gagal menghapus data',
-                            text: swal_message,
-                            icon: 'error',
-                            timer: 2000,
-                            showConfirmButton: false,
-                        });
-                    }
-                });
-            }
-        })
-    });
-
-</script>
 @endsection

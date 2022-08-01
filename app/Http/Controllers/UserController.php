@@ -42,7 +42,7 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'name' => ucwords(strtolower($request->name)),
+            'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'email_verified_at' => now(),
@@ -69,15 +69,13 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|max:30',
             'role' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
         ]);
 
-        $user->name = ucwords(strtolower($request->name));
-        $user->email = $request->email;
-        $user->save();
+        $user->update($validated);
 
         return redirect()->route('user.index');
     }
@@ -96,8 +94,12 @@ class UserController extends Controller
 
     public function destroy(User $user)
     {
+        if ($user->isSuperadmin()) {
+            return response()->json(['message' => 'Superadmin tidak dapat dihapus'], 400);
+        }
+
         if ($user->delete()) {
-            return response()->json(['success' => true]);
+            return response()->json(['success' => true, 'redirect' => route('user.index')]);
         }
 
         return response()->json(['message' => 'Data sedang digunakan'], 400);

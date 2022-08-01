@@ -58,6 +58,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         parent::boot();
 
+        static::saving(function ($user) {
+            $user->name = ucwords(strtolower($user->name));
+        });
+
         static::saved(function ($user) {
             if ($role = request()->role) {
                 $user->syncRoles($role);
@@ -80,5 +84,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lastLogin()
     {
         return $this->hasMany(AuthenticationLog::class, 'authenticatable_id')->orderBy('login_at', 'desc')->take(5);
+    }
+
+    public function isSuperadmin()
+    {
+        return $this->hasRole('superadmin') ? true : false;
     }
 }

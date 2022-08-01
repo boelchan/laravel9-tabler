@@ -7,13 +7,13 @@
     <div class="col-md-12">
         
         <x-datatable.filter target='user-table'>
-            <div class="col-md-4 pe-1">
+            <div class="col-md-4">
                 <x-form-input name="name" label="Nama" floating />
             </div>
-            <div class="col-md-4 pe-1">
+            <div class="col-md-4">
                 <x-form-input name="email" label="Email" floating />
             </div>
-            <div class="col-md-4 pe-1">
+            <div class="col-md-4">
                 <x-form-select name="role" :options="$roleOption" label="Role" placeholder="Pilih Role" floating />
             </div>
         </x-datatable.filter>

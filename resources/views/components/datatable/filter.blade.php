@@ -9,12 +9,13 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-center p-2">
-            <button class="btn btn-pill" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-datatable-filter"
-                aria-expanded="false" aria-controls="collapse-datatable-filter">
+            <button class="btn btn-pill" type="button" 
+                data-bs-toggle="collapse"
+                data-bs-target="#collapse-datatable-filter" aria-expanded="false"
+                aria-controls="collapse-datatable-filter">
                 Tutup
             </button>
-            {!! Form::button('Cari', ['class' => 'submit-filter btn btn-primary btn-pill', 'data-target' => $target,
-            'value'=> 'submit']) !!}
+            {!! Form::button('Cari', ['class' => 'submit-filter btn btn-primary btn-pill', 'data-target' => $target, 'value'=> 'submit']) !!}
             {!! Form::button('Reset', ['class' => 'submit-filter btn btn-warning btn-pill', 'data-target' => $target, 'value'=> 'reset']) !!}
         </div>
     </div>
