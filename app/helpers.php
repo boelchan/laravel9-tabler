@@ -8,3 +8,8 @@ function browser_agent($user_agent)
 
     return $agent->platform().' - '.$agent->browser();
 }
+
+function checkUuid($fieldUuid)
+{
+    abort_if((request()->uuid != $fieldUuid), 404);
+}

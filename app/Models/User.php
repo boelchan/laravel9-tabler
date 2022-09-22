@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\Uuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 use Rappasoft\LaravelAuthenticationLog\Models\AuthenticationLog;
 use Rappasoft\LaravelAuthenticationLog\Traits\AuthenticationLoggable;
@@ -25,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     protected $fillable = [
+        'uuid',
         'name',
         'email',
         'password',
@@ -57,6 +60,10 @@ class User extends Authenticatable implements MustVerifyEmail
     protected static function boot()
     {
         parent::boot();
+
+        static::creating(function ($user) {
+            $user->uuid = (string) Str::uuid();
+        });
 
         static::saving(function ($user) {
             $user->name = ucwords(strtolower($user->name));

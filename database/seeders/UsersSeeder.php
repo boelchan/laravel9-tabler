@@ -17,6 +17,7 @@ class UsersSeeder extends Seeder
     public function run(Generator $faker)
     {
         $demoUser = User::create([
+            'uuid' => $faker->uuid(),
             'name' => $faker->firstName,
             'email' => 'superadmin@app.com',
             'password' => Hash::make('123'),
@@ -26,6 +27,7 @@ class UsersSeeder extends Seeder
         $demoUser->assignRole('superadmin');
 
         $demoUser = User::create([
+            'uuid' => $faker->uuid(),
             'name' => $faker->firstName,
             'email' => 'operator@app.com',
             'password' => Hash::make('123'),
