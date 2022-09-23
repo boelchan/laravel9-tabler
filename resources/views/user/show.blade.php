@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="d-flex">
-                        <a href="javascript:void(0)" class="card-btn delete-user" data-url="{{ route('user.destroy', $user->id) }}"
+                        <a href="javascript:void(0)" class="card-btn delete-user" data-url="{{ route('user.destroy', [$user->id, 'uuid' => $user->uuid]) }}"
                             data-token="{{ csrf_token() }}" data-label="{{ $user->name }}">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash"
                                 width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
@@ -32,7 +32,7 @@
                             </svg>&nbsp;
                             Hapus
                         </a>
-                        <a href="{{ route('user.edit', $user->id) }}" class="card-btn">
+                        <a href="{{ route('user.edit', [$user->id, 'uuid' => $user->uuid]) }}" class="card-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="20"
                                 height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                 stroke-linecap="round" stroke-linejoin="round">
