@@ -22,7 +22,7 @@ class ForbidBannedUser
             $request->session()->invalidate();
             $request->session()->regenerateToken();
 
-            return redirect()->route('login')->with('error', 'Your Account is Banned, please contact Admin.');
+            return redirect()->route('login')->with('error', 'Akunmu diblokir. Segera hubungi Admin untuk mengaktifkan akun Anda.');
         }
 
         return $next($request);
