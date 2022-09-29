@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Daftar')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -10,7 +10,6 @@
                     <div class="card-actions">
                         <a href="{{ route('login') }}" class="btn">Login</a>
                     </div>
-
                 </div>
 
                 <div class="card-body">
