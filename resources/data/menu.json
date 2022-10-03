@@ -2,7 +2,7 @@
     {
         "title": "Home",
         "icon": "home",
-        "url": "home",
+        "route": "home",
         "role": [
             "superadmin"
         ]
@@ -16,7 +16,7 @@
         "sub": [
             {
                 "title": "User",
-                "url": "user",
+                "route": "user.index",
                 "role": [
                     "superadmin"
                 ]
