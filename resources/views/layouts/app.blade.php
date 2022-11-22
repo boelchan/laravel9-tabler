@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- CSRF Token -->
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title') - {{ env('APP_NAME') }}</title>
@@ -75,25 +76,24 @@
                     <div class="collapse navbar-collapse" id="navbar-menu">
                         <div class="d-flex flex-column flex-md-row flex-fill align-items-stretch align-items-md-center">
                             <ul class="navbar-nav">
-                                
-                                @foreach ($menuData as $m)                            
+
+                                @foreach ($menuData as $m)
                                     @if (Auth::check() && Auth::user()->hasRole($m->role))
                                         <li class="nav-item @isset($m->sub) dropdown @endisset">
-                                            <a href="@if(isset($m->sub)) #navbar-base @else {{ route($m->route) }} @endif" 
+                                            <a href="@if (isset($m->sub)) #navbar-base @else {{ route($m->route) }} @endif"
                                                 class="nav-link @isset($m->sub) dropdown-toggle @endisset 
-                                                @if(isset($m->sub))
+                                                @if (isset($m->sub))
                                                     @if (Str::startsWith(Route::currentRouteName(), collect($m->sub)->pluck('route')->all()))
-                                                        active
+                                                        active 
                                                     @endif
                                                 @else
-                                                    {{ (Str::startsWith(Route::currentRouteName(), $m->route)) ? 'active' : '' }}
+                                                    {{ Str::startsWith(Route::currentRouteName(), $m->route) ? 'active' : '' }}
                                                 @endif
                                                 "
                                                 @isset($m->sub)
                                                     data-bs-toggle="dropdown"
                                                     data-bs-auto-close="outside" role="button" aria-expanded="false"
-                                                @endisset
-                                                >
+                                                @endisset>
                                                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                                                     <i class="ti ti-{{ $m->icon }} fs-2"></i>
                                                 </span>
@@ -105,7 +105,7 @@
                                                 <div class="dropdown-menu">
                                                     @foreach ($m->sub as $sub)
                                                         @if (Auth::check() && Auth::user()->hasRole($sub->role))
-                                                            <a href="{{ route($sub->route) }}" class="dropdown-item {{ (Str::startsWith(Route::currentRouteName(), $sub->route)) ? 'active' : '' }}">
+                                                            <a href="{{ route($sub->route) }}" class="dropdown-item {{ Str::startsWith(Route::currentRouteName(), $sub->route) ? 'active' : '' }}">
                                                                 {{ $sub->title }}
                                                             </a>
                                                         @endif
@@ -128,17 +128,17 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <div class="page-pretitle mb-1">
-                                @isset ($breadcrumbs)
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                    @foreach ($breadcrumbs as $breadcrumb)
-                                        @if (!$loop->last)
-                                            <li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['title'] }}</a></li>
-                                        @else
-                                            <li class="breadcrumb-item active">{{ $breadcrumb['title'] }}</li>
-                                        @endif
-                                    @endforeach
-                                </ol>
+                                @isset($breadcrumbs)
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                                        @foreach ($breadcrumbs as $breadcrumb)
+                                            @if (!$loop->last)
+                                                <li class="breadcrumb-item"><a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['title'] }}</a></li>
+                                            @else
+                                                <li class="breadcrumb-item active">{{ $breadcrumb['title'] }}</li>
+                                            @endif
+                                        @endforeach
+                                    </ol>
                                 @endisset
                             </div>
                             <h2 class="page-title text-dark">
@@ -159,23 +159,15 @@
                     <div class="row text-center align-items-center flex-row-reverse">
                         <div class="col-lg-auto ms-lg-auto">
                             <ul class="list-inline list-inline-dots mb-0">
-                                <li class="list-inline-item"><a href="./docs/index.html"
-                                        class="link-secondary">Documentation</a></li>
-                                <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a>
-                                </li>
-                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank"
-                                        class="link-secondary" rel="noopener">Source code</a></li>
+                                <li class="list-inline-item"><a href="./docs/index.html" class="link-secondary">Documentation</a></li>
+                                <li class="list-inline-item"><a href="./license.html" class="link-secondary">License</a> </li>
+                                <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank" class="link-secondary" rel="noopener">Source code</a></li>
                                 <li class="list-inline-item">
-                                    <a href="https://github.com/sponsors/codecalm" target="_blank"
-                                        class="link-secondary" rel="noopener">
+                                    <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary" rel="noopener">
                                         <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="icon text-pink icon-filled icon-inline" width="24" height="24"
-                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                            stroke-linecap="round" stroke-linejoin="round">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                            <path
-                                                d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
+                                            <path d="M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
                                         </svg>
                                         Sponsor
                                     </a>
