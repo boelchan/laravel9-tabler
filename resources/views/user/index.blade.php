@@ -6,7 +6,7 @@
     <div class="container-xl">
         <div class="col-md-12">
 
-            <x-datatable.filter target='user-table'>
+            <x-datatable.filter target='user-table' collapsed="true">
                 <div class="col-md-3">
                     <x-form-input name="name" label="Nama" floating />
                 </div>
@@ -17,7 +17,7 @@
                     <x-form-select name="role" :options="$roleOption" label="Role" placeholder="Pilih Role" floating />
                 </div>
                 <div class="col-md-3">
-                    <x-form-select name="status" :options="['aktif' => 'Aktif', 'tidakAktif' => 'Tidak Aktif']" label="Status" placeholder="Pilih Status" floating />
+                    <x-form-select name="status" :options="['' => 'Semua', 'aktif' => 'Aktif', 'tidakAktif' => 'Tidak Aktif']" label="Status" placeholder="Pilih Status" floating />
                 </div>
             </x-datatable.filter>
 

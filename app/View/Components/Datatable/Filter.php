@@ -8,14 +8,17 @@ class Filter extends Component
 {
     public $target;
 
+    public $collapsed;
+
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($target)
+    public function __construct($target, $collapsed = '')
     {
         $this->target = $target;
+        $this->collapsed = $collapsed == true ? 'show' : '';
     }
 
     /**

@@ -8,7 +8,7 @@
                     <div class="card-header">
                         Daftar
                         <div class="card-actions">
-                            <a href="{{ route('login') }}" class="btn">Login</a>
+                            <a href="{{ route('login') }}" class="btn btn-outline-info">Sudah punya Akun? Login disini</a>
                         </div>
                     </div>
 

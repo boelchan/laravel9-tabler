@@ -13,8 +13,8 @@
     <title>@yield('title') - {{ env('APP_NAME') }}</title>
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    {{-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> --}}
     <!-- Styles -->
     <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet" />
@@ -23,6 +23,15 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/datatables.min.css') }}" />
 
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+        :root {
+            --tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+        body {
+            font-feature-settings: "cv03", "cv04", "cv11";
+        }
+      </style>
 
 </head>
 
@@ -46,27 +55,26 @@
                                 <div class="d-none d-xl-block ps-2">
                                     @if (Auth::check())
                                         <div>{{ auth()->user()->name }}</div>
-                                        <div class="mt-1 small text-muted">{{ auth()->user()->getRoleNames()[0] }}</div>
+                                        <div class="mt-1 small text-muted text-uppercase">{{ auth()->user()->getRoleNames()[0] }}</div>
                                     @endif
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 @if (Auth::check())
                                     <a href="{{ route('profile.index') }}" class="dropdown-item">
-                                        <i class="ti ti-settings fs-2 me-1"></i> Pengaturan Akun
+                                        Pengaturan Akun
                                     </a>
+                                    <div class="dropdown-divider"></div>
                                     <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        <i class="ti ti-logout fs-2 me-1"></i> Logout
+                                        Logout
                                     </a>
                                     <x-form id="logout-form" action="{{ route('logout') }}" style="display: none;"> </x-form>
                                 @else
-                                    <a href="/" class="dropdown-item">
-                                        <i class="ti ti-home fs-2 me-1"></i> Home </a>
-                                    <a href="{{ route('login') }}" class="dropdown-item">
-                                        <i class="ti ti-login fs-2 me-1"></i> Login</a>
+                                    <a href="/" class="dropdown-item">Home </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a href="{{ route('login') }}" class="dropdown-item"> Login</a>
                                     @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="dropdown-item">
-                                            <i class="ti ti-user-plus fs-2 me-1"></i> Daftar </a>
+                                        <a href="{{ route('register') }}" class="dropdown-item"> Daftar </a>
                                     @endif
                                 @endif
 

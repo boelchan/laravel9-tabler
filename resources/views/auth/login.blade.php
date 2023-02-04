@@ -9,7 +9,7 @@
                         Login
                         <div class="card-actions">
                             @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="btn">Daftar</a>
+                                <a href="{{ route('register') }}" class="btn btn-outline-info">Belum punya Akun? Daftar Disini</a>
                             @endif
                         </div>
                     </div>

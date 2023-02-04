@@ -1,4 +1,4 @@
-<div class="collapse mb-2" id="collapse-datatable-filter">
+<div class="collapse mb-2 {{ $collapsed }}" id="collapse-datatable-filter">
     <div class="card border-primary">
         <div class="card-header py-2">
             <h3 class="card-title">Pencarian</h3>
